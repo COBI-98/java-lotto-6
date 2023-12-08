@@ -45,7 +45,7 @@ public enum Ranking {
         }
 
         stringBuilder
-                .append(" (").append(formattedMoney).append("원) ");
+                .append(" (").append(formattedMoney).append("원)");
 
         return stringBuilder.toString();
     }

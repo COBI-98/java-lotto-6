@@ -8,15 +8,16 @@ import lotto.domain.Ranking;
 
 public class OutputView {
 
-    private static final int AMOUNT_UNIT = 1_000;
-    private static final String TICKET_BUY_RESULT_FORMAT = "개를 구매했습니다.";
+    private static final String TICKET_BUY_RESULT_FORMAT = "%d개를 구매했습니다.";
     private static final String WINNING_RESULT_TITLE = "당첨 통계";
     private static final String WINNING_RESULT_CONTOUR = "---";
+    private static final String WINNING_HISTORY = "%s - %d개";
+    private static final String TOTAL_REVENUE_FORMAT = "총 수익률은 %s%%입니다.";
 
 
     public static void printBuyingTicketQuantity(final Player player) {
         System.out.println();
-        System.out.println(player.getPlayerTicketQuantity() + TICKET_BUY_RESULT_FORMAT);
+        System.out.printf(TICKET_BUY_RESULT_FORMAT, player.getPlayerTicketQuantity());
     }
 
     public static void printPlayerLottoTicketInfo(final Player player) {
@@ -31,7 +32,7 @@ public class OutputView {
                 Ranking.FIRST);
 
         resultRanks.stream()
-                .map(rank -> rank.getResultFormat() + "- " + countOfWinning.getOrDefault(rank, 0) + "개")
+                .map(rank -> String.format(WINNING_HISTORY, rank.getResultFormat(), countOfWinning.getOrDefault(rank, 0)))
                 .forEach(System.out::println);
     }
 
@@ -42,7 +43,7 @@ public class OutputView {
     }
 
     public static void responseYieldOfLotto(final String yieldOfLotto) {
-        System.out.println("총 수익률은 " + yieldOfLotto + "%입니다.");
+        System.out.printf(TOTAL_REVENUE_FORMAT, yieldOfLotto);
     }
 
     public static void printException(final Exception exception) {
