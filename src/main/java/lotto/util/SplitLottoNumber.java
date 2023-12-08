@@ -11,7 +11,7 @@ public class SplitLottoNumber {
     private static final String SPLIT_DELIMITER = ",";
     private static final String DUPLICATION_DELIMITER_FORMAT = String.format(".*,,.*");
 
-    public static List<String> splitLottoNumber(String input) {
+    public static List<String> splitLottoNumber(final String input) {
         validateDuplicateDelimiter(input);
         return Arrays.stream(input.split(SPLIT_DELIMITER))
                 .collect(Collectors.toList());

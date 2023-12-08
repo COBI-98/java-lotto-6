@@ -12,7 +12,7 @@ public class LottoDrawingMachine {
     private Lotto lotto;
     private LottoBall lottoBall;
 
-    public LottoDrawingMachine(Lotto lottoNumbers, LottoBall bonusBall) {
+    public LottoDrawingMachine(final Lotto lottoNumbers, final LottoBall bonusBall) {
         validateDuplicationNumbers(lottoNumbers, bonusBall);
         this.lotto = lottoNumbers;
         this.lottoBall = bonusBall;

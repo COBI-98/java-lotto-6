@@ -14,18 +14,18 @@ public class OutputView {
     private static final String WINNING_RESULT_CONTOUR = "---";
 
 
-    public static void printBuyingTicketQuantity(Player player) {
+    public static void printBuyingTicketQuantity(final Player player) {
         System.out.println();
         System.out.println(player.getPlayerTicketQuantity() + TICKET_BUY_RESULT_FORMAT);
     }
 
-    public static void printPlayerLottoTicketInfo(Player player) {
+    public static void printPlayerLottoTicketInfo(final Player player) {
         player.getLottoTicket().stream()
                 .map(Lotto::getNumbers)
                 .forEach(System.out::println);
     }
 
-    public static void printWinningHistory(Map<Ranking, Integer> countOfWinning) {
+    public static void printWinningHistory(final Map<Ranking, Integer> countOfWinning) {
         winningResultTitle();
         List<Ranking> resultRanks = List.of(Ranking.FIFTH, Ranking.FOURTH, Ranking.THIRD, Ranking.SECOND,
                 Ranking.FIRST);
@@ -41,11 +41,11 @@ public class OutputView {
         System.out.println(WINNING_RESULT_CONTOUR);
     }
 
-    public static void responseYieldOfLotto(String yieldOfLotto) {
+    public static void responseYieldOfLotto(final String yieldOfLotto) {
         System.out.println("총 수익률은 " + yieldOfLotto + "%입니다.");
     }
 
-    public static void printException(Exception exception) {
+    public static void printException(final Exception exception) {
         System.out.println(exception.getMessage());
     }
 }

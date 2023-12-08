@@ -36,7 +36,7 @@ public class LottoGameController {
         }
     }
 
-    private void ticketingLotto(Player player) {
+    private void ticketingLotto(final Player player) {
         int quantity = player.getPlayerTicketQuantity();
         OutputView.printBuyingTicketQuantity(player);
         player.setLottoTicket(LottoAgency.createAutoTicket(quantity));
@@ -64,7 +64,7 @@ public class LottoGameController {
         }
     }
 
-    private static LottoDrawingMachine createWinningLottoNumbers(Lotto winningBall, LottoBall bonusBall) {
+    private static LottoDrawingMachine createWinningLottoNumbers(final Lotto winningBall, LottoBall bonusBall) {
         return new LottoDrawingMachine(winningBall, bonusBall);
     }
 }
