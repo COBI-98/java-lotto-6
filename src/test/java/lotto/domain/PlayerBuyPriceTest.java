@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
@@ -7,6 +8,17 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class PlayerBuyPriceTest {
+
+    @DisplayName("constructor() : 구입 금액 생성")
+    @ParameterizedTest
+    @ValueSource(strings = {"1000","10000000"})
+    void playerBuyPrice_constructor_success(String amount) throws Exception {
+        //given
+        PlayerBuyPrice playerBuyPrice = new PlayerBuyPrice(amount);
+
+        //when //then
+        assertThat(playerBuyPrice.amount()).isEqualTo(amount);
+    }
 
     @DisplayName("validateEmptyFromAmount() : 구입 금액에 빈 문자열이 들어가는 경우")
     @ParameterizedTest

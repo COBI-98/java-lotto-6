@@ -1,12 +1,25 @@
 package lotto.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoBallTest {
+
+    @DisplayName("constructor() : 로또 볼 생성 ")
+    @ParameterizedTest
+    @ValueSource(strings = {"1", "45"})
+    void lottoBall_constructor_success(String input) throws Exception{
+        //given
+        LottoBall lottoBall = new LottoBall(input);
+
+        //when //then
+        assertThat(lottoBall.lottoBall()).isEqualTo(input);
+    }
 
     @DisplayName("validateEmptyFromLottoBall() : 로또 볼 숫자가 지워진 경우")
     @ParameterizedTest
