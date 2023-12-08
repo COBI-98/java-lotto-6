@@ -2,6 +2,8 @@ package lotto.domain;
 
 import static lotto.message.ErrorMessages.INVALID_DUPLICATION_LOTTO_BALL_AND_BONUS_BALL;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,18 +22,6 @@ public class LottoDrawingMachine {
         if (lottoNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException(INVALID_DUPLICATION_LOTTO_BALL_AND_BONUS_BALL.getMessage());
         }
-    }
-
-    public static Lotto LottoDrawingMachine(final List<String> lottoBalls) {
-
-        return new Lotto(lottoBalls.stream()
-                .map(LottoDrawingMachine::makeBall)
-                .map(LottoBall::toInt)
-                .collect(Collectors.toList()));
-    }
-
-    private static LottoBall makeBall(final String lottoBall) {
-        return new LottoBall(lottoBall);
     }
 
     public Lotto getLotto() {

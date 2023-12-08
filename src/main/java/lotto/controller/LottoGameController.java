@@ -7,6 +7,7 @@ import lotto.domain.LottoDrawingMachine;
 import lotto.domain.Player;
 import lotto.service.LottoCalculateService;
 import lotto.util.LottoAgency;
+import lotto.util.LottoFactory;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -47,7 +48,7 @@ public class LottoGameController {
         List<String> lottoBallList = InputView.inputWiningLottoNumbers();
 
         try {
-            return LottoDrawingMachine.LottoDrawingMachine(lottoBallList);
+            return LottoFactory.createLotto(lottoBallList);
         } catch (IllegalArgumentException e) {
             OutputView.printException(e);
             return createLotto();
