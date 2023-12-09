@@ -10,12 +10,12 @@ import java.util.stream.Collectors;
 public class LottoDrawingMachine {
 
     private Lotto lotto;
-    private LottoBall lottoBall;
+    private LottoBall bonusBall;
 
     public LottoDrawingMachine(final Lotto lottoNumbers, final LottoBall bonusBall) {
         validateDuplicationNumbers(lottoNumbers, bonusBall);
         this.lotto = lottoNumbers;
-        this.lottoBall = bonusBall;
+        this.bonusBall = bonusBall;
     }
 
     private void validateDuplicationNumbers(Lotto lottoNumbers, LottoBall bonusNumber) {
@@ -29,6 +29,6 @@ public class LottoDrawingMachine {
     }
 
     public LottoBall getLottoBonusBall() {
-        return lottoBall;
+        return bonusBall;
     }
 }
