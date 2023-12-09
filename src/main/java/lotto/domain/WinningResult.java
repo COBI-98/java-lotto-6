@@ -9,12 +9,14 @@ public class WinningResult {
     private final Map<Ranking, Integer> winningResult = new EnumMap<>(Ranking.class);
 
     public WinningResult(List<Ranking> rankings) {
+        initWinningResult();
+        putValues(rankings);
+    }
+
+    private void initWinningResult() {
         List<Ranking> resultRanks = List.of(Ranking.FIFTH, Ranking.FOURTH, Ranking.THIRD, Ranking.SECOND,
                 Ranking.FIRST);
-        for (int i = 0; i < resultRanks.size(); i++) {
-            winningResult.put(resultRanks.get(i), 0);
-        }
-        putValues(rankings);
+        resultRanks.forEach(rank -> winningResult.put(rank, 0));
     }
 
     public long calculatePrizeSum() {
