@@ -4,8 +4,9 @@ import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoBall;
 import lotto.domain.LottoDrawingMachine;
-import lotto.domain.Player;
-import lotto.service.LottoCalculateService;
+import lotto.domain.LottoTicket;
+import lotto.domain.PlayerBuyPrice;
+import lotto.domain.WinningResult;
 import lotto.util.LottoAgency;
 import lotto.util.LottoFactory;
 import lotto.view.InputView;
@@ -13,35 +14,39 @@ import lotto.view.OutputView;
 
 public class LottoGameController {
 
-    private final LottoCalculateService lottoCalculateService = new LottoCalculateService();
-
     public void startGame() {
-        Player player = inputAmount();
-        ticketingLotto(player);
+        PlayerBuyPrice playerBuyPrice = inputAmount();
+        LottoTicket lottoTicket = ticketingLotto(playerBuyPrice);
 
         Lotto winningBall = createLotto();
         LottoBall bonusBall = createBonusBall();
 
         LottoDrawingMachine lottoDrawingMachine = createWinningLottoNumbers(winningBall, bonusBall);
 
-        lottoCalculateService.calculateWinning(player, lottoDrawingMachine);
+        WinningResult winningResult = lottoTicket.calculateWinningStatistic(lottoDrawingMachine);
+
+        OutputView.winningResultTitle();
+        OutputView.printWinningStatistic(winningResult);
+        OutputView.responseYieldOfLotto(playerBuyPrice.calculateProfit(winningResult.calculatePrizeSum()));
     }
 
-    private static Player inputAmount() {
+    private static PlayerBuyPrice inputAmount() {
         try {
-            return new Player(InputView.inputAmount());
+            return new PlayerBuyPrice(InputView.inputAmount());
         } catch (IllegalArgumentException e) {
             OutputView.printException(e);
             return inputAmount();
         }
     }
 
-    private void ticketingLotto(final Player player) {
-        int quantity = player.getPlayerTicketQuantity();
-        OutputView.printBuyingTicketQuantity(player);
-        player.setLottoTicket(LottoAgency.createAutoTicket(quantity));
+    private LottoTicket ticketingLotto(final PlayerBuyPrice playerBuyPrice) {
+        int quantity = playerBuyPrice.calculateLottoQuantity();
+        LottoTicket autoTicket = LottoAgency.createAutoTicket(quantity);
 
-        OutputView.printPlayerLottoTicketInfo(player);
+        OutputView.printBuyingTicketQuantity(playerBuyPrice);
+        OutputView.printPlayerLottoTicketInfo(autoTicket);
+
+        return autoTicket;
     }
 
     private Lotto createLotto() {

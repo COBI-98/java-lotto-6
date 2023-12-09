@@ -1,52 +1,60 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum Ranking {
-    FIRST(6, 6, 2_000_000_000),
-    SECOND(7, 5, 30_000_000),
-    THIRD(5, 5, 1_500_000),
-    FOURTH(4, 4, 50_000),
-    FIFTH(3, 3, 5_000),
-    FIND(1, 0, 0);
+    FIRST(6, 2_000_000_000, false),
+    SECOND(5, 30_000_000, true),
+    THIRD(5, 1_500_000, false),
+    FOURTH(4, 50_000, false),
+    FIFTH(3, 5_000, false),
+    NONE(0, 0, false);
 
-    private final int idx;
     private final int matchedCount;
-    private final int price;
+    private final int winningMoney;
+    private final boolean hasBonusBall;
 
-    Ranking(int idx, int matchedCount, int price) {
-        this.idx = idx;
+    Ranking(int matchedCount, int winningMoney, boolean hasBonusBall) {
         this.matchedCount = matchedCount;
-        this.price = price;
+        this.winningMoney = winningMoney;
+        this.hasBonusBall = hasBonusBall;
     }
 
-    public int getPrice() {
-        return price;
+
+    public static Ranking findByRanking(int count, boolean hasBonusBall) {
+
+        return Arrays.stream(Ranking.values())
+                .filter(ranking -> ranking.hasBonusBall(count, hasBonusBall))
+                .findAny()
+                .orElse(NONE);
+
+    }
+
+    private boolean hasBonusBall(int count, boolean hasBonusNumber) {
+        if (matchedCount != count){
+            return false;
+        }
+
+        if (count == SECOND.getMatchedCount()){
+            return hasBonusBall == hasBonusNumber;
+        }
+
+        return true;
+    }
+
+    public long multiple(Integer count) {
+        return (long) count * winningMoney;
+    }
+
+    public int getWinningMoney() {
+        return winningMoney;
     }
 
     public int getMatchedCount() {
         return matchedCount;
     }
 
-    public Ranking valueOf(int label) {
-        for (Ranking winning : Ranking.values()) {
-            if (label == winning.idx) {
-                return winning;
-            }
-        }
-
-        return null;
-    }
-
-    public String getResultFormat() {
-        String formattedMoney = String.format("%,d", price);
-        StringBuilder stringBuilder = new StringBuilder(matchedCount + "개 일치");
-
-        if (this == Ranking.SECOND) {
-            stringBuilder.append(", 보너스 볼 일치");
-        }
-
-        stringBuilder
-                .append(" (").append(formattedMoney).append("원)");
-
-        return stringBuilder.toString();
+    public boolean hasBonusBall() {
+        return hasBonusBall;
     }
 }

@@ -3,6 +3,7 @@ package lotto.domain;
 import static lotto.message.ErrorMessages.INVALID_DUPLICATION_LOTTO_BALLS;
 import static lotto.message.ErrorMessages.INVALID_LOTTO_BALL_SIZE;
 
+import java.util.Arrays;
 import java.util.List;
 import lotto.util.RandomUtils;
 
@@ -47,5 +48,11 @@ public class Lotto {
     public boolean contains(final LottoBall otherLottoNumber) {
         return numbers.stream()
                 .anyMatch(lottoNumber -> lottoNumber.equals(otherLottoNumber.toInt()));
+    }
+
+    public int calculateSameCount(final List<Integer> lottoNumbers){
+        return (int) lottoNumbers.stream()
+                .filter(this.numbers::contains)
+                .count();
     }
 }
