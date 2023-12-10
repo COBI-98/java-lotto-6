@@ -19,7 +19,7 @@ public class LottoDrawingMachine {
         }
     }
 
-    public Ranking calculateRanking(final Lotto playerLotto){
+    public Ranking calculateRanking(final Lotto playerLotto) {
         int count = playerLotto.calculateSameCount(lotto.getNumbers());
         return Ranking.findByRanking(count, playerLotto.contains(bonusBall));
     }

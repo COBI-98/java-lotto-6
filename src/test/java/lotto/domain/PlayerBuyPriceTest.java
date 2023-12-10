@@ -11,7 +11,7 @@ class PlayerBuyPriceTest {
 
     @DisplayName("constructor() : 구입 금액 생성")
     @ParameterizedTest
-    @ValueSource(strings = {"1000","10000000"})
+    @ValueSource(strings = {"1000", "10000000"})
     void playerBuyPrice_constructor_success(String amount) throws Exception {
         //given
         PlayerBuyPrice playerBuyPrice = new PlayerBuyPrice(amount);

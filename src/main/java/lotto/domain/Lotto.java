@@ -41,10 +41,6 @@ public class Lotto {
         }
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
-    }
-
     public boolean contains(final LottoBall otherLottoNumber) {
         return numbers.stream()
                 .anyMatch(lottoNumber -> lottoNumber.equals(otherLottoNumber.toInt()));
@@ -54,5 +50,9 @@ public class Lotto {
         return (int) lottoNumbers.stream()
                 .filter(this.numbers::contains)
                 .count();
+    }
+
+    public List<Integer> getNumbers() {
+        return numbers;
     }
 }

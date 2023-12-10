@@ -28,7 +28,7 @@ class LottoTicketTest {
 
     @DisplayName("calculateWinningStatistic() : 발행한 로또 티켓의 로또 별 순위 리스트 생성")
     @Test
-    void calculateWinningStatistic_success() throws Exception{
+    void calculateWinningStatistic_success() throws Exception {
         //given
         LottoTicket autoTicket = createAutoTicket();
         LottoDrawingMachine lottoDrawingMachine = startLottoDrawingMachine();
@@ -50,7 +50,6 @@ class LottoTicketTest {
         Lotto createLotto4 = new Lotto(List.of(1, 2, 3, 4, 44, 45));
         Lotto createLotto5 = new Lotto(List.of(1, 2, 3, 42, 43, 45));
         Lotto createLotto6 = new Lotto(List.of(1, 2, 41, 42, 43, 45));
-
 
         return new LottoTicket(List.of(createLotto1, createLotto2, createLotto3,
                 createLotto4, createLotto5, createLotto6));

@@ -21,7 +21,7 @@ class WinningResultTest {
 
     @DisplayName("constructor() : 등수 별 당첨 결과 생성")
     @Test
-    void winningResult_constructor_success() throws Exception{
+    void winningResult_constructor_success() throws Exception {
         //given
         int limitWins = 5;
         WinningResult winningResult = new WinningResult(List.of(FIRST, THIRD));
@@ -29,13 +29,13 @@ class WinningResultTest {
         //when //then
         assertThat(winningResult.getWinningResult()).hasSize(limitWins)
                 .contains(entry(FIRST, 1), entry(SECOND, 0), entry(THIRD, 1)
-                ,entry(FOURTH, 0), entry(FIFTH, 0));
+                        , entry(FOURTH, 0), entry(FIFTH, 0));
     }
 
     @DisplayName("calculatePrizeSum() : 당첨된 수령금 계산")
     @ParameterizedTest
     @MethodSource("generateRankingData")
-    void calculatePrizeSum_success(List<Ranking> rankings, long prize) throws Exception{
+    void calculatePrizeSum_success(List<Ranking> rankings, long prize) throws Exception {
         //given
         WinningResult winningResult = new WinningResult(rankings);
 
