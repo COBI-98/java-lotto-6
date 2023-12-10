@@ -4,7 +4,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoTicket;
@@ -21,8 +20,6 @@ public class OutputView {
     public static final String WINNING_PRICE_AND_WINNING_COUNT_FORMAT = " (%,d원) - %d개%n";
     public static final String CORRECT_BONUS_BALL = ", 보너스 볼 일치";
     private static final String TOTAL_REVENUE_FORMAT = "총 수익률은 %s%%입니다.";
-
-
 
     public static void printBuyingTicketQuantity(final PlayerBuyPrice playerBuyPrice) {
         System.out.println();

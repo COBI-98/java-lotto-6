@@ -31,11 +31,11 @@ public enum Ranking {
     }
 
     private boolean hasBonusBall(int count, boolean hasBonusNumber) {
-        if (matchedCount != count){
+        if (matchedCount != count) {
             return false;
         }
 
-        if (count == SECOND.getMatchedCount()){
+        if (count == SECOND.getMatchedCount()) {
             return hasBonusBall == hasBonusNumber;
         }
 

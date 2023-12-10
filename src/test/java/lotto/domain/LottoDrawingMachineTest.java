@@ -6,21 +6,17 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
-import lotto.domain.Lotto;
-import lotto.domain.LottoBall;
-import lotto.domain.LottoDrawingMachine;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoDrawingMachineTest {
 
     @DisplayName("constructor() : 로또 기계가 당첨 번호와 보너스번호를 생성한다.")
     @Test
-    void lottoDrawingMachine_constructor_success() throws Exception{
+    void lottoDrawingMachine_constructor_success() throws Exception {
         //given
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         LottoBall bonusBall = new LottoBall("7");
@@ -47,11 +43,11 @@ class LottoDrawingMachineTest {
                 .hasMessage(exceptionMessage);
 
     }
-    
+
     @DisplayName("calculateRanking() : 플레이어가 발행한 로또와 로또 당첨 번호를 비교하여 순위 계산")
     @ParameterizedTest
     @MethodSource("generateData")
-    void calculateRanking_success(List<Integer> playerLotto, Ranking expectedRanking) throws Exception{
+    void calculateRanking_success(List<Integer> playerLotto, Ranking expectedRanking) throws Exception {
         //given
         LottoDrawingMachine lottoDrawingMachine = startLottoDrawingMachine();
         Lotto lotto = new Lotto(playerLotto);

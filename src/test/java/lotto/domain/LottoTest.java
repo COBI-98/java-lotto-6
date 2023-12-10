@@ -14,7 +14,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoTest {
     @DisplayName("로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.")
@@ -61,7 +60,7 @@ class LottoTest {
     @DisplayName("calculateSameCount() : 당첨로또와 같은 로또 번호 개수 계산")
     @ParameterizedTest
     @MethodSource("generateData")
-    void calculateSameCount_success(List<Integer> lottoNumbers, int count) throws Exception{
+    void calculateSameCount_success(List<Integer> lottoNumbers, int count) throws Exception {
         //given
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
