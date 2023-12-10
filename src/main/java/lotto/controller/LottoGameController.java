@@ -14,6 +14,14 @@ import lotto.view.OutputView;
 
 public class LottoGameController {
 
+    private final InputView inputView;
+    private final OutputView outputView;
+
+    public LottoGameController() {
+        inputView = new InputView();
+        outputView = new OutputView();
+    }
+
     public void startGame() {
         PlayerBuyPrice playerBuyPrice = inputAmount();
         LottoTicket lottoTicket = ticketingLotto(playerBuyPrice);
@@ -25,16 +33,14 @@ public class LottoGameController {
 
         WinningResult winningResult = lottoTicket.calculateWinningStatistic(lottoDrawingMachine);
 
-        OutputView.winningResultTitle();
-        OutputView.printWinningStatistic(winningResult);
-        OutputView.responseYieldOfLotto(playerBuyPrice.calculateProfit(winningResult.calculatePrizeSum()));
+        printWinningResult(playerBuyPrice, winningResult);
     }
 
-    private static PlayerBuyPrice inputAmount() {
+    private PlayerBuyPrice inputAmount() {
         try {
-            return new PlayerBuyPrice(InputView.inputAmount());
+            return new PlayerBuyPrice(inputView.inputAmount());
         } catch (IllegalArgumentException e) {
-            OutputView.printException(e);
+            outputView.printException(e);
             return inputAmount();
         }
     }
@@ -43,33 +49,39 @@ public class LottoGameController {
         int quantity = playerBuyPrice.calculateLottoQuantity();
         LottoTicket autoTicket = LottoAgency.createAutoTicket(quantity);
 
-        OutputView.printBuyingTicketQuantity(playerBuyPrice);
-        OutputView.printPlayerLottoTicketInfo(autoTicket);
+        outputView.printBuyingTicketQuantity(playerBuyPrice);
+        outputView.printPlayerLottoTicketInfo(autoTicket);
 
         return autoTicket;
     }
 
     private Lotto createLotto() {
-        List<String> lottoBallList = InputView.inputWiningLottoNumbers();
+        List<String> lottoBallList = inputView.inputWiningLottoNumbers();
 
         try {
             return LottoFactory.createLotto(lottoBallList);
         } catch (IllegalArgumentException e) {
-            OutputView.printException(e);
+            outputView.printException(e);
             return createLotto();
         }
     }
 
     private LottoBall createBonusBall() {
         try {
-            return new LottoBall(InputView.inputWiningBonusLottoNumber());
+            return new LottoBall(inputView.inputWiningBonusLottoNumber());
         } catch (IllegalArgumentException e) {
-            OutputView.printException(e);
+            outputView.printException(e);
             return createBonusBall();
         }
     }
 
     private static LottoDrawingMachine createWinningLottoNumbers(final Lotto winningBall, LottoBall bonusBall) {
         return new LottoDrawingMachine(winningBall, bonusBall);
+    }
+
+    private void printWinningResult(PlayerBuyPrice playerBuyPrice, WinningResult winningResult) {
+        outputView.winningResultTitle();
+        outputView.printWinningStatistic(winningResult);
+        outputView.responseYieldOfLotto(playerBuyPrice.calculateProfit(winningResult.calculatePrizeSum()));
     }
 }
