@@ -6,6 +6,7 @@ import lotto.domain.LottoBall;
 import lotto.domain.LottoDrawingMachine;
 import lotto.domain.LottoTicket;
 import lotto.domain.PlayerBuyPrice;
+import lotto.domain.Ranking;
 import lotto.domain.WinningResult;
 import lotto.util.LottoAgency;
 import lotto.util.LottoFactory;
@@ -31,7 +32,7 @@ public class LottoGameController {
 
         LottoDrawingMachine lottoDrawingMachine = createWinningLottoNumbers(winningBall, bonusBall);
 
-        WinningResult winningResult = lottoTicket.calculateWinningStatistic(lottoDrawingMachine);
+        WinningResult winningResult = createWinningResult(lottoTicket, lottoDrawingMachine);
 
         printWinningResult(playerBuyPrice, winningResult);
     }
@@ -77,6 +78,11 @@ public class LottoGameController {
 
     private static LottoDrawingMachine createWinningLottoNumbers(final Lotto winningBall, LottoBall bonusBall) {
         return new LottoDrawingMachine(winningBall, bonusBall);
+    }
+
+    private static WinningResult createWinningResult(LottoTicket lottoTicket, LottoDrawingMachine lottoDrawingMachine) {
+        List<Ranking> rankings = lottoTicket.calculateWinningStatistic(lottoDrawingMachine);
+        return new WinningResult(rankings);
     }
 
     private void printWinningResult(PlayerBuyPrice playerBuyPrice, WinningResult winningResult) {

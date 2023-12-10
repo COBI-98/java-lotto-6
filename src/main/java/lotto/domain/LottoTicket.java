@@ -9,12 +9,12 @@ import java.util.Objects;
 
 public record LottoTicket(List<Lotto> lottoTicket) {
 
-    public WinningResult calculateWinningStatistic(LottoDrawingMachine winningNumbers) {
-        List<Ranking> rankings = lottoTicket.stream()
+    public List<Ranking> calculateWinningStatistic(LottoDrawingMachine winningNumbers) {
+
+        return lottoTicket.stream()
                 .map(lotto -> winningNumbers.calculateRanking(lotto))
                 .filter(Objects::nonNull)
                 .collect(collectingAndThen(toList(), Collections::unmodifiableList));
-        return new WinningResult(rankings);
     }
 
 }
